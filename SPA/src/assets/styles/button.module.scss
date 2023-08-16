@@ -1,0 +1,71 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.basicButton {
+  border: none;
+  background: none;
+  text-decoration: none;
+}
+
+.btnOutline {
+  @include font($size: 1.5rem, $family: $primaryFont, $color: $outline);
+  border: 3px solid $outline;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 0.2rem 2rem;
+
+  &:hover {
+    background-color: $hover;
+    cursor: pointer;
+    color: $white;
+    border-color: $white;
+  }
+}
+
+.btnSolid {
+  @include font($size: 1.3rem, $family: $primaryFontBold, $color: $white);
+  width: fit-content;
+  background-color: $fontColor;
+  border-radius: 5px;
+  padding: 0.6rem 2rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: $hover;
+    cursor: pointer;
+  }
+}
+
+.contactBtn {
+  @include size(102px, 37px);
+  @include font($size: 1.125rem, $family: $primaryFontBold);
+  @include flex(row, center, center);
+  background-color: $thirdCover;
+  color: $fontColor;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: $hoverWhite;
+    cursor: pointer;
+  }
+}
+
+.logoutBtn {
+  @include size(102px, 37px);
+  @include font($size: 1.125rem, $family: $primaryFontBold);
+  @include flex(row, center, center);
+  background-color: $logoutColor;
+  color: $fontColor;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: $hover;
+    cursor: pointer;
+  }
+}

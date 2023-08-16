@@ -1,0 +1,44 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.actionContainer {
+  @include flex($direction: column, $align-items: center, $justify-content: space-between);
+  background-color: $primaryCover;
+  margin-top: 30px;
+
+  &_callToAction {
+    @include flex($direction: column, $align-items: center);
+    @include font($size: 4.5rem, $family: $primaryFontBlack, $color: $fontColor);
+    justify-content: center;
+    height: 70%;
+    margin-top: 30px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &_copyright {
+    @include flex($direction: column, $align-items: center, $justify-content: flex-end);
+    height: 30%;
+    margin-bottom: 15px;
+
+    & > * {
+      margin: 0;
+    }
+
+    &_text {
+      opacity: 0.9;
+      color: $fontColor;
+      font-family: $primaryFont;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .actionContainer_callToAction {
+    p {
+      font-size: 3rem;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@mixin font($size: null, $weight: null, $color: null, $family: null) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  font-family: $family;
+}
+
+@mixin size($width: null, $height: null) {
+  width: $width;
+  height: $height;
+}
+
+@mixin flex($direction: null, $align-items: null, $justify-content: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}

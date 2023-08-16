@@ -1,0 +1,59 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    @include font($size: 1.1rem, $color: $fontColor, $family: $primaryFontBold);
+    margin-bottom: 1rem;
+  }
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.4rem;
+
+    &_icon {
+      position: absolute;
+      right: 0.5rem;
+      font-size: 1.3em;
+      color: $dangerColor;
+
+      &:hover {
+        transform: scale(1.3);
+      }
+    }
+  }
+
+  input {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.5rem 2.3rem 0.5rem 0.7rem;
+    border-radius: 5px;
+    border: 1px solid $fontColor;
+    background-color: $white;
+    box-shadow: 0 0 0 30px $white inset;
+
+    &:disabled {
+      background: $white;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    align-items: center;
+
+    input {
+      width: 100%;
+    }
+  }
+}

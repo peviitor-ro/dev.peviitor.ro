@@ -1,0 +1,72 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.aboutSection {
+  width: 85vw;
+  @include flex($direction: column, $justify-content: space-between);
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+
+  &_head {
+    height: fit-content;
+    margin-bottom: 4rem;
+
+    h3 {
+      @include font($size: 4rem, $family: $primaryFontBlack, $color: $fontColor);
+      margin: 0;
+      text-align: center;
+    }
+
+    p {
+      @include font($size: 1.25rem, $family: $primaryFont, $color: $fontColor);
+      width: 50%;
+      margin: 0 auto;
+      margin-top: 15px;
+      text-align: center;
+    }
+  }
+
+  &_details {
+    @include size(100%, 50%);
+    @include flex($direction: row, $justify-content: space-between);
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    height: 100%;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+
+    &_head {
+      margin-bottom: 2rem;
+
+      h3 {
+        font-size: 3rem;
+      }
+
+      p {
+        width: 100%;
+      }
+    }
+
+    &_details {
+      @include flex($direction: column, $justify-content: space-between);
+      flex-wrap: nowrap;
+      height: 100%;
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .aboutSection {
+    &_head {
+      p {
+        margin-bottom: initial;
+      }
+    }
+  }
+}

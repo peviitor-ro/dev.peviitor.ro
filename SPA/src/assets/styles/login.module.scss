@@ -1,0 +1,81 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  margin: 25vh auto;
+  padding: 4rem 3rem;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 229, 254, 0.9),
+    rgba(251, 231, 237, 0.34),
+    rgba(212, 226, 247, 0.34)
+  );
+  color: #3e3e3e;
+}
+
+.container .row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wellcomeMsg {
+  font-size: 1.2rem;
+  font-family: "segoeui";
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-family: "JustMandrawn";
+  font-size: 3.6rem;
+  font-weight: 400;
+}
+.logo .preLogo {
+  font-size: 2rem;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 1.2rem;
+}
+
+a span {
+  margin-right: 6px;
+}
+
+.github {
+  background: gray;
+}
+.github:hover {
+  background: rgba(128, 128, 128, 0.8);
+}
+
+.gitlab {
+  background: #fa783c;
+}
+.gitlab:hover {
+  background: rgba(250, 120, 60, 0.8);
+}
+
+.gitlab svg {
+  --svg-fill: inherit; /* Initialize with 'inherit' to inherit from parent */
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 85%;
+    padding: 4rem 1.5rem;
+    margin: auto;
+  }
+}

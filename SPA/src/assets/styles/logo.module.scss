@@ -1,0 +1,20 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.logo {
+  @include font($size: 2.25rem, $family: $logoFont);
+  cursor: pointer;
+  color: $black;
+  transition: color 0.5s;
+
+  .preLogo {
+    font-size: 2.25rem;
+  }
+
+  &:hover {
+    color: $highlightColor;
+  }
+}
+
+@media (max-width: 768px) {
+}

@@ -1,0 +1,55 @@
+// color pallete variables
+
+$fontColor: #3e3e3e;
+$highlightColor: #5378fa;
+$logoutColor: #ffacb5;
+
+$gradientStart: rgba(251, 229, 254, 0.9);
+$gradientMiddle: rgba(251, 231, 237, 0.34);
+$gradientEnd: rgba(212, 226, 247, 0.34);
+
+$lineGradientStart: #fad7ff;
+$lineGradientEnd: #c7ddff;
+
+$primaryCover: #f0f5fc;
+$secondaryCover: #fad8ff;
+$thirdCover: #f2f2f2;
+
+$white: #ffffff;
+$black: #000000;
+$hover: #555555;
+$hoverWhite: #e2e2e2;
+$hoverKey: gold;
+$outline: #738efa;
+$dangerColor: rgb(255, 60, 60);
+
+// font variables
+
+@font-face {
+  font-family: "justMandrawn";
+  src: local("justMandrawn"), url("/Users/virla/Desktop/repos/dev_front-end/src/assets/styles/_partials/fonts/justMandrawn.woff2") format("woff2");
+  unicode-range: U+0025-00FF;
+}
+
+@font-face {
+  font-family: "segoeUI";
+  src: local("segoeUI"), url("/Users/virla/Desktop/repos/dev_front-end/src/assets/styles/_partials/fonts/segoeUI.woff2") format("woff2");
+  unicode-range: U+0025-00FF;
+}
+
+@font-face {
+  font-family: "segoeUI_bold";
+  src: local("segoeUI_bold"), url("/Users/virla/Desktop/repos/dev_front-end/src/assets/styles/_partials/fonts/segoeUI_bold.woff2") format("woff2");
+  unicode-range: U+0025-00FF;
+}
+
+@font-face {
+  font-family: "segoeUI_black";
+  src: local("segoeUI_black"), url("/Users/virla/Desktop/repos/dev_front-end/src/assets/styles/_partials/fonts/segoeUI_black.woff2") format("woff2");
+  unicode-range: U+0025-00FF;
+}
+
+$logoFont: "justMandrawn";
+$primaryFont: "segoeUI";
+$primaryFontBold: "segoeUI_bold";
+$primaryFontBlack: "segoeUI_black";

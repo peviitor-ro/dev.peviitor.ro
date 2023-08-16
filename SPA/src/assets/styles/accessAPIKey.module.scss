@@ -1,0 +1,97 @@
+@import "_partials/variables.scss";
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, $gradientStart, $gradientMiddle, $gradientEnd);
+  font-family: $primaryFontBold;
+
+  &_title {
+    align-self: center;
+    color: $fontColor;
+    font-size: 3rem;
+  }
+}
+
+.formContainer_body {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1.4rem;
+
+  .actionsContainer {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .infoBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: initial;
+    background: $fontColor;
+    font-family: $primaryFont;
+    font-size: 1.125rem;
+    color: $white;
+    padding: 1.5rem 2rem;
+    position: relative;
+
+    &_title {
+      font-size: inherit;
+      margin-bottom: 2rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    &_button {
+      width: fit-content;
+      margin: 0 auto;
+    }
+  }
+}
+
+.listItem {
+  text-decoration: none;
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    width: 100%;
+
+    &_title {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      text-align: center;
+    }
+  }
+
+  .formContainer_body {
+    width: 100%;
+
+    .actionsContainer {
+      width: 100%;
+      margin-left: 0;
+
+      .actionsContainer_form {
+        padding: 2rem;
+      }
+    }
+
+    .infoBox {
+      width: initial;
+      right: 0;
+    }
+  }
+}

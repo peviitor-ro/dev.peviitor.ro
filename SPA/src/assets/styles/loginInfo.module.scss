@@ -1,0 +1,65 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.loginInfo {
+  @include size(40%, auto);
+  @include flex($direction: column);
+  border-radius: 5px;
+  transition: transform 0.3s ease-out;
+  background: rgb(251, 229, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 229, 254, 0.9) 0%,
+    rgba(251, 231, 237, 0.34) 50%,
+    rgba(212, 226, 247, 0.6811099439775911) 100%
+  );
+
+  &:hover {
+    transform: translate(0, -5px);
+  }
+
+  &_header {
+    @include flex(row, center, center);
+    height: 20%;
+    border-bottom: 1px solid rgba(146, 146, 146, 0.5);
+    font-size: 2.5rem;
+
+    p {
+      @include font($size: 2rem, $family: $primaryFontBold, $color: $fontColor);
+      margin-left: 15px;
+    }
+  }
+
+  &_body {
+    @include flex($direction: column, $justify-content: flex-start);
+    height: 80%;
+    padding: 15px;
+
+    &_step {
+      @include size(100%, auto);
+      @include flex($direction: row, $align-items: flex-start);
+      margin-top: 15px;
+
+      &_text {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      p {
+        margin: 0 2px;
+        padding-bottom: 6px;
+      }
+    }
+  }
+}
+
+.highlightedText {
+  font-weight: bold;
+  color: $highlightColor;
+}
+
+@media (max-width: 768px) {
+  .loginInfo {
+    @include size(85%, auto);
+  }
+}

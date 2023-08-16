@@ -1,0 +1,34 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.loginSteps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &_items {
+    @include flex($direction: row, $justify-content: space-around);
+    flex-wrap: wrap;
+    margin-top: 6%;
+
+    & > * {
+      margin-bottom: 50px;
+    }
+  }
+
+  &_instructions {
+    @include font($size: 1.4rem, $family: $primaryFont, $color: $fontColor);
+    width: 85%;
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginSteps {
+    &_items {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.menuBar {
+  @include flex(row, center, space-between);
+  @include size(85vw, 5vh);
+  margin: 0 auto;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+
+  .logoutBtn {
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .menuBar {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+}

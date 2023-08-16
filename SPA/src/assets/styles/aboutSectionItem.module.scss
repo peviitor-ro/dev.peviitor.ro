@@ -1,0 +1,39 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.aboutSectionItem {
+  width: 45%;
+  display: flex;
+  margin-top: 2rem;
+
+  &_icon {
+    @include size(50px, 50px);
+    @include flex(row, center, center);
+    @include font($color: $white, $size: 1.7rem);
+    background-color: $highlightColor;
+    border-radius: 5px;
+  }
+
+  &_text {
+    @include size(90%, 100%);
+    @include flex($direction: column);
+    margin-left: 2%;
+
+    h4 {
+      @include font($size: 1.4rem, $family: $primaryFontBold, $color: $fontColor);
+      margin: 0;
+    }
+
+    p {
+      @include font($size: 1.2rem, $family: $primaryFont, $color: $fontColor);
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSectionItem {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}

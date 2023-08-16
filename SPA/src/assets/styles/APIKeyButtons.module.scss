@@ -1,0 +1,72 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.container {
+  padding: 3rem 0 0;
+
+  &_body {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  h2 {
+    @include font($size: 1.1rem, $color: $fontColor, $family: $primaryFontBold);
+    margin-top: 0;
+  }
+}
+
+.keyDisplay {
+  display: flex;
+  justify-content: space-between;
+  background-color: $white;
+  min-width: 45ch;
+  border-radius: 26px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+
+  &_text {
+    padding: 0.5rem 1.6rem;
+    margin: 0;
+    @include font($color: $fontColor, $family: $primaryFont);
+    white-space: nowrap;
+  }
+
+  &_icon {
+    padding: 0.5rem 1.2rem;
+    background-color: $secondaryCover;
+    align-self: center;
+
+    .keyIcon {
+      padding-right: 0.5rem;
+      border-right: 1px solid $fontColor;
+
+      &:hover {
+        color: $hoverKey;
+      }
+    }
+
+    .copyIcon {
+      padding-left: 0.5rem;
+
+      &:hover {
+        color: $hover;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .keyDisplay {
+    min-width: fit-content;
+
+    &_text {
+      font-size: 3.5vw;
+    }
+  }
+}

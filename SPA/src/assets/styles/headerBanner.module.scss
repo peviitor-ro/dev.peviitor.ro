@@ -1,0 +1,149 @@
+@import "_partials/mixins.scss";
+@import "_partials/variables.scss";
+
+.headerBanner {
+  @include size(85vw, 80vh);
+  display: flex;
+  margin: 0 auto;
+  background: rgb(251, 229, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 229, 254, 0.9) 0%,
+    rgba(251, 231, 237, 0.34) 50%,
+    rgba(212, 226, 247, 0.6811099439775911) 100%
+  );
+
+  &_highlight {
+    color: $highlightColor;
+  }
+
+  &_firstCol {
+    @include size(50%, 100%);
+  }
+
+  &_text {
+    @include flex($direction: column, $justify-content: flex-end);
+    margin-left: 7%;
+    height: 50%;
+
+    h2 {
+      @include font($size: 4.3rem, $family: $primaryFontBlack, $color: $fontColor);
+      margin: 0;
+    }
+
+    p {
+      @include font($size: 1.25rem, $family: $primaryFontBlack, $color: $fontColor);
+      width: 60%;
+      margin: 0;
+      margin-top: 10px;
+    }
+  }
+
+  &_btn {
+    height: 35%;
+    margin-left: 7%;
+    @include flex($direction: row, $align-items: center);
+  }
+
+  &_secondCol {
+    @include size(50%, 100%);
+    @include flex(row, center, flex-end);
+
+    img {
+      max-width: 85%;
+      margin-right: 7%;
+    }
+  }
+}
+
+.modalContainer {
+  height: 100%;
+
+  &_header {
+    @include font($size: 1.4rem, $family: $primaryFontBold, $color: $fontColor);
+    height: 20%;
+    border-bottom: 1px solid rgba(118, 118, 118, 0.5);
+  }
+
+  &_body {
+    @include flex(row, center, space-between);
+    height: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerBanner {
+    @include size(100%, 90vh);
+    flex-direction: column-reverse;
+
+    &_firstCol {
+      @include size(100%, 50%);
+      @include flex(column, center, flex-start);
+    }
+
+    &_text {
+      @include flex($align-items: center, $justify-content: center);
+      margin-left: initial;
+
+      h2 {
+        text-align: center;
+        font-size: 3rem;
+      }
+
+      p {
+        text-align: center;
+        width: 80%;
+      }
+    }
+
+    &_btn {
+      margin-left: initial;
+      height: 50%;
+    }
+
+    &_secondCol {
+      @include size(100%, 50%);
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .headerBanner {
+    &_text {
+      h2 {
+        width: 100%;
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        width: 90%;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .headerBanner {
+    &_text {
+      h2 {
+        width: 100%;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .headerBanner {
+    &_text {
+      h2 {
+        font-size: 3.25rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
