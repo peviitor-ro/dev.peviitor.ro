@@ -1,8 +1,12 @@
-import { buttonStyles, accessAPIKeyStyles } from "Styles";
+import { useState } from "react";
+import { NotificationContainer } from "react-notifications";
+import { buttonStyles, accessAPIKeyStyles, notificationStyles } from "Styles";
 import { APIKeyButtons, Form } from "./account_components";
 import { Button, Menu } from "./common_components";
+import "react-notifications/lib/notifications.css";
 
 const Account = () => {
+  const [notificationStatus, setNotificationStatus] = useState(false);
   const {
     formContainer,
     formContainer_body,
@@ -15,17 +19,28 @@ const Account = () => {
     listItem
   } = accessAPIKeyStyles;
   const { btnOutline } = buttonStyles;
+  const { notification, notificationHidden } = notificationStyles;
+
+  const triggerNotification = async () => {
+    setNotificationStatus(true);
+    setTimeout(() => {
+      setNotificationStatus(false);
+    }, 4000);
+  };
 
   return (
     <div>
       <Menu />
       <div className={formContainer}>
         <div className={formContainer_body}>
-          <div className={actionsContainer}>
+          <div
+            className={(actionsContainer, notificationStatus ? notification : notificationHidden)}
+          >
             <div className={actionsContainer_form}>
               <Form />
             </div>
-            <APIKeyButtons />
+            <APIKeyButtons triggerNotification={triggerNotification} />
+            <NotificationContainer />
           </div>
 
           <div className={infoBox}>

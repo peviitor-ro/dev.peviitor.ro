@@ -6,11 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { faClipboard } from "@fortawesome/free-regular-svg-icons";
 import { CircleLoader } from "react-spinners";
+import { NotificationManager } from "react-notifications";
 import { APIKeyButtonsStyles } from "Styles";
 
 const { URL } = process.env;
 
-const APIKeyButtons = () => {
+const APIKeyButtons = (props) => {
+  const [copyTriggered, setCopyTriggered] = useState(false);
+  const { triggerNotification } = props;
   const [apikey, setApikey] = useState("");
   const [loadingApikey, setLoadingApikey] = useState(true);
   const {
@@ -48,7 +51,15 @@ const APIKeyButtons = () => {
   };
 
   const copy = async () => {
-    await navigator.clipboard.writeText(apikey);
+    if (!copyTriggered) {
+      setCopyTriggered(true);
+      triggerNotification();
+      NotificationManager.info("Cheia a fost copiata", "Success!", 4000);
+      await navigator.clipboard.writeText(apikey);
+      setTimeout(() => {
+        setCopyTriggered(false);
+      }, 4000);
+    }
   };
 
   useEffect(() => {
@@ -83,7 +94,6 @@ const APIKeyButtons = () => {
                 <FontAwesomeIcon icon={faKey} style={{ cursor: "pointer" }} />
               )}
             </span>
-
             <span className={copyIcon} onClick={() => copy()}>
               <FontAwesomeIcon icon={faClipboard} style={{ cursor: "pointer" }} />
             </span>
