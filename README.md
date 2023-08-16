@@ -9,7 +9,7 @@ Check package.json for more scripts.
 
 ## Backend
 
-Define all the variables in root/env.php. (API_GET and API_POST must have a trailing slash here... so we need https://you/know/the/url/)
+Define all the variables in root/env.php. (same syntax for URL, no trailing slash. However, API_GET and API_POST must have a trailing slash...)
 
 ## Uploading the website to cPanel
 
