@@ -1,7 +1,6 @@
 <?php
 $staticAssetsController = function ($request, $response) {
     $requestedPath = substr($request->path, 1);
-    error_log($requestedPath);
     if (file_exists($requestedPath) && $requestedPath !== "" && strpos($requestedPath, 'dist') === 0) {
         $fileContent = file_get_contents($requestedPath);
         $extension = pathinfo($requestedPath, PATHINFO_EXTENSION);
