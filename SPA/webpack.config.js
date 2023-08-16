@@ -64,6 +64,17 @@ module.exports = (env, argv) => {
           ]
         },
         {
+          test: /\.css$/i,
+          use: [
+            // Extracts CSS into separate file
+            MiniCssExtractPlugin.loader,
+            // Mainly needed for react-notifications
+            "style-loader",
+            // Translates CSS into CommonJS
+            "css-loader"
+          ]
+        },
+        {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: "asset/resource"
         },
