@@ -1,2 +1,1 @@
-# dev.peviitor.ro
-dev.peviitor.ro
+# [dev.peviitor.ro](https://dev.peviitor.ro)
