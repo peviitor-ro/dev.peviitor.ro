@@ -13,7 +13,7 @@ Define all the variables in root/env.php. (API_GET and API_POST must have a trai
 
 ## Uploading the website to cpanel
 
-Build the Frontend first. Copy paste everything but the SPA, LICENSE and README.md files in the public_html.
+Build the Frontend first. Copy paste everything but the SPA, .gitignore, LICENSE and README.md files in the public_html.
 
 You will need to modify/create a .htaccess file. See the .htaccess on the testdomain for what you need to write.
 
