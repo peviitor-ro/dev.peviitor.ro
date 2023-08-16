@@ -3,13 +3,13 @@
 ## Frontend
 To build the app, go inside SPA and run "npm run build_php". The assets will be generated on root/dist
 
-Don't forget to supply the website URL in .env (with no trailing slashes prefferably)
+Don't forget to supply the website URL in .env (with no trailing slashes prefferably, so https://my-website.com good, https://not-my-website.com/ bad)
 
 Check package.json for more scripts.
 
 ## Backend
 
-Define all the variables in root/env.php. (API_GET and API_POST must have a trailing slash here...)
+Define all the variables in root/env.php. (API_GET and API_POST must have a trailing slash here... so we need https://you/know/the/url/)
 
 ## Uploading the website to cpanel
 
