@@ -11,7 +11,7 @@ Check package.json for more scripts.
 
 Define all the variables in root/env.php. (API_GET and API_POST must have a trailing slash here... so we need https://you/know/the/url/)
 
-## Uploading the website to cpanel
+## Uploading the website to cPanel
 
 Build the Frontend first. Copy paste everything but the SPA, .gitignore, LICENSE and README.md files in the public_html.
 
