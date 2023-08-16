@@ -15,7 +15,7 @@ Define all the variables in root/env.php. (same syntax for URL, no trailing slas
 
 ## Uploading the website to cPanel
 
-Build the Frontend first. Copy paste everything but the SPA, .gitignore, LICENSE and README.md files in the public_html.
+Build the Frontend first. From root, copy paste everything but the SPA, .gitignore, LICENSE and README.md files in the public_html.
 
 You will need to modify/create a .htaccess file. See the .htaccess on the testdomain for what you need to write.
 
