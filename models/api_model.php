@@ -19,8 +19,6 @@ class ApiModel
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $dataJSON = curl_exec($ch);
-        error_log($urlWithQueryParams);
-        error_log($dataJSON);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         curl_close($ch);
