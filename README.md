@@ -1,7 +1,7 @@
 # [dev.peviitor.ro](https://dev.peviitor.ro)
 
 ## Frontend
-To build the app, go inside SPA and run "npm run build_php". The assets will be generated on root/dist
+To build the app, go inside SPA and run "npm i" then "npm run build_php". The assets will be generated on root/dist
 
 Don't forget to supply the website URL in .env (with no trailing slashes prefferably, so https://my-website.com good, https://not-my-website.com/ bad)
 
