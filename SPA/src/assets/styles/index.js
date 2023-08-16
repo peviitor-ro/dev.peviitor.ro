@@ -12,3 +12,4 @@ export { default as loginInfoStyles } from "./loginInfo.module.scss";
 export { default as loginStepsStyles } from "./loginSteps.module.scss";
 export { default as logoStyles } from "./logo.module.scss";
 export { default as menuStyles } from "./menu.module.scss";
+export { default as notificationStyles } from "./notification.module.scss";
