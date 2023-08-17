@@ -21,19 +21,28 @@
 }
 
 .notification > div:last-child {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     bottom: 0;
-    left: 50%;
-    width: min(30vw, 100px);
+    left: calc(50vw - 100px);
+    width: 200px;
+    height: 20px;
     text-align: center;
-    transform: translateX(-50%);
+    border-radius: 50px;
     padding: 10px;
     background-color: green;
     color: white;
     border-radius: 5px;
     opacity: 1;
-    animation: fadeIn 2s ease, fadeOut 2s ease 2s forwards;
+    animation: fadeIn 1.5s ease, fadeOut 1.5s ease 2s forwards;
     z-index: 1;
+}
+
+.notification > div:last-child h4 {
+    top: -10px;
+    left: 35px;
+    position: absolute;
 }
 
 .notificationHidden > div:last-child {
@@ -42,7 +51,7 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 10px;
-    background-color: green;
+    background-color: white;
     color: white;
     border-radius: 5px;
     opacity: 1;

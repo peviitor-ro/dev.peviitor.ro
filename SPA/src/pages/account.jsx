@@ -25,7 +25,7 @@ const Account = () => {
     setNotificationStatus(true);
     setTimeout(() => {
       setNotificationStatus(false);
-    }, 4000);
+    }, 3000);
   };
 
   return (

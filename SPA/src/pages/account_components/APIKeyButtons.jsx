@@ -54,11 +54,11 @@ const APIKeyButtons = (props) => {
     if (!copyTriggered) {
       setCopyTriggered(true);
       triggerNotification();
-      NotificationManager.info("Cheia a fost copiata", "Success!", 4000);
+      NotificationManager.info("", "Cheia a fost copiata!", 3000);
       await navigator.clipboard.writeText(apikey);
       setTimeout(() => {
         setCopyTriggered(false);
-      }, 4000);
+      }, 3000);
     }
   };
 
