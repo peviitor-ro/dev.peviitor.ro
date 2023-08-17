@@ -24,3 +24,12 @@ You will need to modify/create a php.ini file. Again, see on testdomain.
 ## Footnotes
 
 Needless to say, **DO NOT COMMIT** the .env or env.php with values. Same reasoning for why there's no .htaccess & php.ini files.
+
+
+## Known Bugs
+
+
+"ESlint unable to resolve imports" -> just comment the line below in webpack.config.js and restart VSCode (remember to uncomment it when running the build command)
+```javascript
+  publicPath: env.target === "php" ? "dist/" : "./"
+```
