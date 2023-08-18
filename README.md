@@ -8,8 +8,8 @@
 4. Under SPA directory, run "npm -i" followed by "npm run build_php". A dist directory will be generated in your repo root.
 5. So far, we've configured and generated the frontend assets. Now comes the backend
 6. First we're going to need our own GitHub and GitLab Oauth apps, but to spare us some text space we'll cover the GitHub one only since the process is similar.
-7. On GitHub, go to Settings > Developer Settings > New Oauth App. Homepage should be set to "http://localhost" and callback should be set to "http//localhost/oauth/github/callback". Name your app whatever you like.
-8. On GitLab, the process is about the same ("http://localhost", "http//localhost/oauth/gitlab/callback") , with the only difference being that you have to tick "read_api" on the access list.
+7. On GitHub, go to Settings > Developer Settings > New Oauth App. Homepage should be set to "http://localhost" and callback should be set to "http://localhost/oauth/github/callback". Name your app whatever you like.
+8. On GitLab, the process is about the same ("http://localhost", "http://localhost/oauth/gitlab/callback") , with the only difference being that you have to tick "read_api" on the access list.
 9. Once you have your GitHub and GitLab apps running, fill in the appropriate URLs & secrets in the env.php file.
 10. Copy paste the entire repo without SPA, .git, ReadME.md, .gitignore and LICENSE files in C:\\xampp\\htdocs
 11. You will need to create a php.ini and .htaccess file. Ask around in our discord for these files.
