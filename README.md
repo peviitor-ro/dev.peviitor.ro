@@ -1,33 +1,27 @@
 # [dev.peviitor.ro](https://dev.peviitor.ro)
 
-## Frontend
-To build the app, go inside SPA and run "npm i" then "npm run build_php". The assets will be generated on root/dist
+## Running on localhost
 
-**NOTE:** Before building, you must edit the font paths in __partials/variables.scss. Untill we come up with an alternative that involves relative paths and NO source-maps, providing the absolute paths will have to makedo.
-
-Don't forget to supply the website URL in .env (with no trailing slashes prefferably, so https://my-website.com good, https://not-my-website.com/ bad)
-
-Check package.json for more scripts.
-
-## Backend
-
-Define all the variables in root/env.php. (same syntax for URL, no trailing slash. However, API_GET and API_POST must have a trailing slash...)
-
-## Uploading the website to cPanel
-
-Build the Frontend first. From root, copy paste everything but the SPA, .gitignore, LICENSE and README.md files in the public_html.
-
-You will need to modify/create a .htaccess file. See the .htaccess on the testdomain for what you need to write.
-
-You will need to modify/create a php.ini file. Again, see on testdomain.
+1. Install PHP 8.2 and XAMPP. Assuming you're using Windows, to make your life easier please install XAMPP under C:\\xampp. Also, please "Run as administrator" at every step of the install to avoid Windows shenanigans.
+2. Go to the repo > SPA. Inside .env, set URL="http://localhost".
+3. SPA > src > assets > styles > _partials > variables.scss: Edit the font paths to match the absolute paths in your computer. Untill we find a solution that uses relative font urls without having to generate an additional 6MBs worth of files called "source-maps" this will have to make do.
+4. Under SPA directory, run "npm -i" followed by "npm run build_php". A dist directory will be generated in your repo root.
+5. So far, we've configured and generated the frontend assets. Now comes the backend
+6. First we're going to need our own GitHub and GitLab Oauth apps, but to spare us some text space we'll cover the GitHub one only since the process is similar.
+7. On GitHub, go to Settings > Developer Settings > New Oauth App. Homepage should be set to "http://localhost" and callback should be set to "http//localhost/oauth/github/callback". Name your app whatever you like.
+8. On GitLab, the process is about the same ("http://localhost", "http//localhost/oauth/gitlab/callback") , with the only difference being that you have to tick "read_api" on the access list.
+9. Once you have your GitHub and GitLab apps running, fill in the appropriate URLs & secrets in the env.php file.
+10. Copy paste the entire repo without SPA, .git, ReadME.md, .gitignore and LICENSE files in C:\\xampp\\htdocs
+11. You will need to create a php.ini and .htaccess file. Ask around in our discord for these files.
+12. Finally, run XAMPP.exe, start Apache, and your localhost should be setup!
 
 ## Footnotes
 
+If you wish, you can run the frontend app only. Go to SPA and run "npm run start". Any changes you make to the source files will be reflected live on your localhost website.
+
 Needless to say, **DO NOT COMMIT** the .env or env.php with values. Same reasoning for why there's no .htaccess & php.ini files.
 
-
 ## Known Bugs
-
 
 "ESlint unable to resolve imports" -> just comment the line below in webpack.config.js and restart VSCode (remember to uncomment it when running the build command)
 ```javascript
