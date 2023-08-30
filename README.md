@@ -18,7 +18,7 @@
 
 If you wish, you can run the frontend app only. Go to SPA and run "npm run start". Any changes you make to the source files will be reflected live on your localhost website.
 
-Needless to say, **DO NOT COMMIT** the .env or env.php with values. Same reasoning for why there's no .htaccess & php.ini files.
+Needless to say, **DO NOT COMMIT** the .env or env.php with values.
 
 ## Known Bugs
 
