@@ -12,14 +12,13 @@
 8. On GitLab, the process is about the same ("http://localhost", "http://localhost/oauth/gitlab/callback") , with the only difference being that you have to tick "read_api" on the access list.
 9. Once you have your GitHub and GitLab apps running, fill in the appropriate URLs & secrets in the env.php file.
 10. Copy paste the entire repo without SPA, .git, ReadME.md, .gitignore and LICENSE files in C:\\xampp\\htdocs
-11. You will need to create a php.ini and .htaccess file. Ask around in our discord for these files.
-12. Finally, run XAMPP.exe, start Apache, and your localhost should be setup!
+11. Finally, run XAMPP.exe, start Apache, and your localhost should be setup!
 
 ## Footnotes
 
 If you wish, you can run the frontend app only. Go to SPA and run "npm run start". Any changes you make to the source files will be reflected live on your localhost website.
 
-Needless to say, **DO NOT COMMIT** the .env or env.php with values. Same reasoning for why there's no .htaccess & php.ini files.
+Needless to say, **DO NOT COMMIT** the .env or env.php with values.
 
 ## Known Bugs
 
