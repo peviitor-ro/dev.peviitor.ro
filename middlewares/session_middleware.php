@@ -3,12 +3,11 @@
 $sessionMiddleware = function ($request, $response, $next) {
     
     session_start();
-    $sessionExpiration = 30 * 60; // 30 minutes
+    $sessionExpiration = 30 * 60;
 
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $sessionExpiration)) {
         session_unset();
         session_destroy();
-        header('Location: /');
     }
 
     $_SESSION['LAST_ACTIVITY'] = time();
