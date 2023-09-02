@@ -4,6 +4,8 @@ import { APIKeyButtons, Form } from "./account_components";
 import { Button, Menu } from "./common_components";
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import { useNavigate } from "react-router";
+
 const { URL } = process.env;
 
 const Account = () => {
@@ -31,13 +33,15 @@ const Account = () => {
     }, 3000);
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const login = async () => {
       try {
         const response = await fetch(`${URL}/user/login`);
         if (response.status === 401) {
           setTimeout(() => {
-            window.location.href = URL + "/login";
+            navigate("/login");
           }, 3000);
           NotificationManager.error("Session expired!", "Error", 3000);
           setAuthenticated(false);
@@ -45,7 +49,7 @@ const Account = () => {
           setAuthenticated(true);
         }
       } catch (error) {
-        window.location.href = URL + "/";
+        navigate("/");
         setAuthenticated(false);
         return false;
       }
