@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { NotificationContainer } from "react-notifications";
+import { useState, useEffect } from "react";
 import { buttonStyles, accessAPIKeyStyles, notificationStyles } from "Styles";
 import { APIKeyButtons, Form } from "./account_components";
 import { Button, Menu } from "./common_components";
 import "react-notifications/lib/notifications.css";
+import { NotificationContainer, NotificationManager } from "react-notifications";
+import { useNavigate } from "react-router";
+
+const { URL } = process.env;
 
 const Account = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
   const {
     formContainer,
     formContainer_body,
@@ -18,6 +22,7 @@ const Account = () => {
     list,
     listItem
   } = accessAPIKeyStyles;
+
   const { btnOutline } = buttonStyles;
   const { notification, notificationHidden } = notificationStyles;
 
@@ -28,7 +33,31 @@ const Account = () => {
     }, 3000);
   };
 
-  return (
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const login = async () => {
+      try {
+        const response = await fetch(`${URL}/user/login`);
+        if (response.status === 401) {
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+          NotificationManager.error("Session expired!", "Error", 3000);
+          setAuthenticated(false);
+        }else {
+          setAuthenticated(true);
+        }
+      } catch (error) {
+        navigate("/");
+        setAuthenticated(false);
+        return false;
+      }
+    };
+    login();
+  }, []);
+
+  const component = authenticated ? (
     <div>
       <Menu />
       <div className={formContainer}>
@@ -88,7 +117,10 @@ const Account = () => {
         </div>
       </div>
     </div>
-  );
+  ) : (
+    <NotificationContainer />
+    );
+  return component;
 };
 
 export default Account;
