@@ -12,30 +12,12 @@ class ApiModel
     }
     public function getUserData($email)
     {
-        $queryParameters = http_build_query(['user' => $email]);
-        $urlWithQueryParams = $this->API_GET . '?' . $queryParameters;
+        [$data, $httpCode] = $this->getCurl($email);
 
-        $ch = curl_init($urlWithQueryParams);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $dataJSON = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        $data = json_decode($dataJSON, true);
-
-        if ($httpCode !== 200 || $data === null || !isset($data['apikey'])) {
-            $query = http_build_query(['apikey' => 'A NEW APIKEY PLEASE!']);
+        if ($httpCode !== 200 || $data === null) {
+            $query = [];
             $this->updateUserData($email, $query);
-
-            $ch = curl_init($urlWithQueryParams);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-            $dataJSON = curl_exec($ch);
-            curl_close($ch);
-
-            $data = json_decode($dataJSON, true);
+            [$data, $httpCode] = $this->getCurl($email);
         }
 
         return $data;
@@ -64,17 +46,29 @@ class ApiModel
         return $response;
     }
 
+    private function getCurl($email)
+    {
+        $queryParameters = http_build_query(['user' => $email]);
+        $urlWithQueryParams = $this->API_GET . '?' . $queryParameters;
+ 
+        $ch = curl_init($urlWithQueryParams);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $dataJSON = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+    
+        $data = json_decode($dataJSON, true);
+        return [$data, $httpCode];
+    }
+
     private function generateAPIKey()
     {
         $apikey = $this->v4();
         return $apikey;
     }
 
-    private function getApiKey($email)
-    {
-        $data = $this->getUserData($email);
-        return $data['apikey'];
-    }
     private function v4()
     {
         if (function_exists('random_bytes')) {
@@ -98,21 +92,15 @@ class ApiModel
         ];
 
         if (isset($query['company'])) {
-            error_log("Updating company: " . $query['company'] . " for " . $email . "...");
             $data['company'] = [$query['company']];
         }
 
         if (isset($query['url'])) {
-            error_log("Updating url: " . $query['url'] . " for " . $email . "...");
             $data['url'] = [$query['url']];
         }
 
         if (isset($query['apikey'])) {
-            error_log("Updating apikey for " . $email . "...");
             $apikey = $this->generateAPIKey();
-            $data['apikey'] = $apikey;
-        } else {
-            $apikey = $this->getApiKey($email);
             $data['apikey'] = $apikey;
         }
 
