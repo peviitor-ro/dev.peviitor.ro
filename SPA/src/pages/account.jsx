@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useEffect, useState } from "react";
 import { NotificationContainer } from "react-notifications";
 import { useNavigate } from "react-router";
