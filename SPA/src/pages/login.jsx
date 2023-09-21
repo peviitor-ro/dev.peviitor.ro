@@ -22,19 +22,6 @@ const Login = () => {
     window.location.href = `${URL}/oauth/${oauthMethod}`;
   };
 
-  useEffect(() => {
-    const login = async () => {
-      try {
-        const response = await fetch(`${URL}/user/login`);
-        if (response.ok) navigate("/account");
-        return true;
-      } catch (error) {
-        navigate("/");
-        return false;
-      }
-    };
-    login();
-  }, []);
   return (
     <div className={container}>
       <h1 className={logo}>

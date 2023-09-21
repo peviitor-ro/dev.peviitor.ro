@@ -7,15 +7,15 @@ import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { faClipboard } from "@fortawesome/free-regular-svg-icons";
 import { CircleLoader } from "react-spinners";
 import { NotificationManager } from "react-notifications";
+import { useNavigate } from "react-router";
 import { APIKeyButtonsStyles } from "Styles";
 
 const { URL } = process.env;
 
 const APIKeyButtons = (props) => {
   const [copyTriggered, setCopyTriggered] = useState(false);
-  const { triggerNotification } = props;
+  const { triggerNotification, apikeyInitial, setLoadingApikeyFn, loadingApikey } = props;
   const [apikey, setApikey] = useState("");
-  const [loadingApikey, setLoadingApikey] = useState(true);
   const {
     container,
     container_body,
@@ -25,8 +25,10 @@ const APIKeyButtons = (props) => {
     keyIcon,
     copyIcon
   } = APIKeyButtonsStyles;
+  const navigate = useNavigate();
+
   const getNewAPIKey = async () => {
-    setLoadingApikey(true);
+    setLoadingApikeyFn(true);
     try {
       const request = {
         apikey: "Update key please!"
@@ -40,14 +42,16 @@ const APIKeyButtons = (props) => {
         body: JSON.stringify(request)
       };
       const response = await fetch(`${URL}/api`, requestOptions);
-      const dataJSON = await fetch(`${URL}/api`);
-      const data = await dataJSON.json();
-      const apikeyNew = data.apikey[0];
-      setApikey(apikeyNew);
+      if (response.status === 401) navigate("/login");
+      else {
+        const data = await response.json();
+        const apikeyNew = data[0].apikey;
+        setApikey(apikeyNew);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    setLoadingApikey(false);
+    setLoadingApikeyFn(false);
   };
 
   const copy = async () => {
@@ -62,27 +66,12 @@ const APIKeyButtons = (props) => {
     }
   };
 
-  useEffect(() => {
-    const getAPIKey = async () => {
-      try {
-        const response = await fetch(`${URL}/api`);
-        const data = await response.json();
-        const apikeyNew = data.apikey[0];
-        setApikey(apikeyNew);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      setLoadingApikey(false);
-    };
-    getAPIKey();
-  }, []);
-
   return (
     <div className={container}>
       <div className={container_body}>
         <h2>Cheie API:</h2>
         <div className={keyDisplay}>
-          <p className={keyDisplay_text}>{apikey || "Genereaza o cheie..."}</p>
+          <p className={keyDisplay_text}>{apikey || apikeyInitial || "Genereaza o cheie..."}</p>
           <div className={keyDisplay_icon}>
             <span className={keyIcon} onClick={getNewAPIKey}>
               {loadingApikey ? (

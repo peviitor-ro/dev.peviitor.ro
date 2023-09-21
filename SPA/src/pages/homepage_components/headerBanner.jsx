@@ -20,13 +20,7 @@ const HeaderBanner = () => {
   } = headerBannerStyles;
   const navigate = useNavigate();
   const login = async () => {
-    try {
-      const response = await fetch(`${URL}/user/login`);
-      if (response.ok) navigate("/account");
-      else navigate("/login");
-    } catch (error) {
-      navigate("/");
-    }
+    navigate("/login");
   };
   return (
     <div className={headerBanner}>

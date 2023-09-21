@@ -18,20 +18,14 @@ const ActionContainer = () => {
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
 
-  const login = async () => {
-    try {
-      const response = await fetch(`${URL}/user/login`);
-      if (response.ok) navigate("/account");
-      else navigate("/login");
-    } catch (error) {
-      navigate("/");
-    }
+  const goToLogin = async () => {
+    navigate("/login");
   };
   return (
     <div className={actionContainer}>
       <div className={actionContainer_callToAction}>
         <p>Contribuie</p>
-        <a onClick={login}>
+        <a onClick={goToLogin}>
           <Button label="Login 🤘" buttonStyle={btnSolid} />
         </a>
       </div>

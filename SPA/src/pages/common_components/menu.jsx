@@ -29,9 +29,7 @@ const Menu = () => {
       try {
         await fetch(`${URL}/user/logout`);
         navigate("/"); // If navigate is not defined, import it from your router library (e.g., 'react-router-dom')
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     if (logoutFlag) {
       logout();

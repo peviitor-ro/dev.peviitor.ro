@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { NotificationContainer } from "react-notifications";
+import { useNavigate } from "react-router";
 import { buttonStyles, accessAPIKeyStyles, notificationStyles } from "Styles";
 import { APIKeyButtons, Form } from "./account_components";
 import { Button, Menu } from "./common_components";
 import "react-notifications/lib/notifications.css";
-import { NotificationContainer, NotificationManager } from "react-notifications";
-import { useNavigate } from "react-router";
 
 const { URL } = process.env;
 
 const Account = () => {
   const [notificationStatus, setNotificationStatus] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
   const {
     formContainer,
     formContainer_body,
@@ -25,6 +24,39 @@ const Account = () => {
 
   const { btnOutline } = buttonStyles;
   const { notification, notificationHidden } = notificationStyles;
+  const [userInfo, setUserInfo] = useState({
+    companyInitial: "",
+    urlInitial: "",
+    emailInitial: "",
+    apikeyInitial: ""
+  });
+  const [loadingApikey, setLoadingApikey] = useState(true);
+  const [loadingForm, setLoadingForm] = useState(true);
+  const navigate = useNavigate();
+
+  const setLoadingApikeyFn = (val) => setLoadingApikey(val);
+  const setLoadingFormFn = (val) => setLoadingForm(val);
+
+  useEffect(() => {
+    const getInitialData = async () => {
+      try {
+        const response = await fetch(`${URL}/api`);
+        if (response.status === 401) navigate("/login");
+        else {
+          const data = await response.json();
+          const apikeyInitial = data.apikey[0];
+          const { company: companyInitial, url: urlInitial, id: emailInitial } = data;
+          const initialUser = { apikeyInitial, companyInitial, urlInitial, emailInitial };
+          setUserInfo({ ...userInfo, ...initialUser });
+          setLoadingApikey(false);
+          setLoadingForm(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getInitialData();
+  }, []);
 
   const triggerNotification = async () => {
     setNotificationStatus(true);
@@ -33,31 +65,7 @@ const Account = () => {
     }, 3000);
   };
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const login = async () => {
-      try {
-        const response = await fetch(`${URL}/user/login`);
-        if (response.status === 401) {
-          setTimeout(() => {
-            navigate("/login");
-          }, 3000);
-          NotificationManager.error("Session expired!", "Error", 3000);
-          setAuthenticated(false);
-        }else {
-          setAuthenticated(true);
-        }
-      } catch (error) {
-        navigate("/");
-        setAuthenticated(false);
-        return false;
-      }
-    };
-    login();
-  }, []);
-
-  const component = authenticated ? (
+  const component = (
     <div>
       <Menu />
       <div className={formContainer}>
@@ -66,9 +74,20 @@ const Account = () => {
             className={(actionsContainer, notificationStatus ? notification : notificationHidden)}
           >
             <div className={actionsContainer_form}>
-              <Form />
+              <Form
+                companyInitial={userInfo.companyInitial}
+                urlInitial={userInfo.urlInitial}
+                emailInitial={userInfo.emailInitial}
+                loadingForm={loadingForm}
+                setLoadingFormFn={setLoadingFormFn}
+              />
             </div>
-            <APIKeyButtons triggerNotification={triggerNotification} />
+            <APIKeyButtons
+              triggerNotification={triggerNotification}
+              apikeyInitial={userInfo.apikeyInitial}
+              loadingApikey={loadingApikey}
+              setLoadingApikeyFn={setLoadingApikeyFn}
+            />
             <NotificationContainer />
           </div>
 
@@ -117,9 +136,7 @@ const Account = () => {
         </div>
       </div>
     </div>
-  ) : (
-    <NotificationContainer />
-    );
+  );
   return component;
 };
 
