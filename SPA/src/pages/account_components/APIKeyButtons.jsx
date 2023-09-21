@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -14,8 +15,7 @@ const { URL } = process.env;
 
 const APIKeyButtons = (props) => {
   const [copyTriggered, setCopyTriggered] = useState(false);
-  const { triggerNotification, apikeyInitial, setLoadingApikeyFn, loadingApikey } = props;
-  const [apikey, setApikey] = useState("");
+  const { triggerNotification, apikey, setUserInfoFn, toggleLoading, loadingApikey } = props;
   const {
     container,
     container_body,
@@ -27,8 +27,8 @@ const APIKeyButtons = (props) => {
   } = APIKeyButtonsStyles;
   const navigate = useNavigate();
 
-  const getNewAPIKey = async () => {
-    setLoadingApikeyFn(true);
+  const postApiKey = async () => {
+    toggleLoading("apikey", true);
     try {
       const request = {
         apikey: "Update key please!"
@@ -45,13 +45,13 @@ const APIKeyButtons = (props) => {
       if (response.status === 401) navigate("/login");
       else {
         const data = await response.json();
-        const apikeyNew = data[0].apikey;
-        setApikey(apikeyNew);
+        const apikeyNew = data[0]?.apikey;
+        setUserInfoFn({ apikey: apikeyNew });
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    setLoadingApikeyFn(false);
+    toggleLoading("apikey", false);
   };
 
   const copy = async () => {
@@ -71,9 +71,9 @@ const APIKeyButtons = (props) => {
       <div className={container_body}>
         <h2>Cheie API:</h2>
         <div className={keyDisplay}>
-          <p className={keyDisplay_text}>{apikey || apikeyInitial || "Genereaza o cheie..."}</p>
+          <p className={keyDisplay_text}>{apikey || "Genereaza o cheie..."}</p>
           <div className={keyDisplay_icon}>
-            <span className={keyIcon} onClick={getNewAPIKey}>
+            <span className={keyIcon} onClick={postApiKey}>
               {loadingApikey ? (
                 <CircleLoader
                   size={16}

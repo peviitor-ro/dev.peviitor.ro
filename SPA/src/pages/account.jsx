@@ -25,37 +25,60 @@ const Account = () => {
   const { btnOutline } = buttonStyles;
   const { notification, notificationHidden } = notificationStyles;
   const [userInfo, setUserInfo] = useState({
-    companyInitial: "",
-    urlInitial: "",
-    emailInitial: "",
-    apikeyInitial: ""
+    company: "",
+    url: "",
+    email: "",
+    apikey: ""
   });
   const [loadingApikey, setLoadingApikey] = useState(true);
   const [loadingForm, setLoadingForm] = useState(true);
   const navigate = useNavigate();
 
-  const setLoadingApikeyFn = (val) => setLoadingApikey(val);
-  const setLoadingFormFn = (val) => setLoadingForm(val);
+  const setUserInfoFn = (val) => setUserInfo({ ...userInfo, ...val });
+
+  const toggleLoading = (type, flag) => {
+    switch (type) {
+      case "apikey":
+        setLoadingApikey(flag);
+        break;
+      case "form":
+        setLoadingForm(flag);
+        break;
+      default:
+        setLoadingApikey(flag);
+        setLoadingForm(flag);
+        break;
+    }
+  };
+
+  const fetchInitialData = async () => {
+    try {
+      toggleLoading("both mate", true);
+      const response = await fetch(`${URL}/api`);
+      if (response.status === 401) navigate("/login");
+      else {
+        const data = await response.json();
+        const apikey = data?.apikey?.[0];
+        const { company, url, id: email } = data;
+        const userFetched = {
+          apikey,
+          company,
+          url,
+          email
+        };
+        setUserInfo({ ...userInfo, ...userFetched });
+        setLoadingApikey(false);
+        setLoadingForm(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      toggleLoading("both mate", false);
+    }
+  };
 
   useEffect(() => {
-    const getInitialData = async () => {
-      try {
-        const response = await fetch(`${URL}/api`);
-        if (response.status === 401) navigate("/login");
-        else {
-          const data = await response.json();
-          const apikeyInitial = data.apikey[0];
-          const { company: companyInitial, url: urlInitial, id: emailInitial } = data;
-          const initialUser = { apikeyInitial, companyInitial, urlInitial, emailInitial };
-          setUserInfo({ ...userInfo, ...initialUser });
-          setLoadingApikey(false);
-          setLoadingForm(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    getInitialData();
+    fetchInitialData();
   }, []);
 
   const triggerNotification = async () => {
@@ -75,18 +98,20 @@ const Account = () => {
           >
             <div className={actionsContainer_form}>
               <Form
-                companyInitial={userInfo.companyInitial}
-                urlInitial={userInfo.urlInitial}
-                emailInitial={userInfo.emailInitial}
+                company={userInfo.company}
+                url={userInfo.url}
+                email={userInfo.email}
                 loadingForm={loadingForm}
-                setLoadingFormFn={setLoadingFormFn}
+                setUserInfoFn={setUserInfoFn}
+                toggleLoading={toggleLoading}
               />
             </div>
             <APIKeyButtons
               triggerNotification={triggerNotification}
-              apikeyInitial={userInfo.apikeyInitial}
+              apikey={userInfo.apikey}
               loadingApikey={loadingApikey}
-              setLoadingApikeyFn={setLoadingApikeyFn}
+              setUserInfoFn={setUserInfoFn}
+              toggleLoading={toggleLoading}
             />
             <NotificationContainer />
           </div>

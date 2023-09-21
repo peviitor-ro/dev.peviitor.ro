@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -30,7 +31,7 @@ const Menu = () => {
         await fetch(`${URL}/user/logout`);
         navigate("/"); // If navigate is not defined, import it from your router library (e.g., 'react-router-dom')
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     if (logoutFlag) {

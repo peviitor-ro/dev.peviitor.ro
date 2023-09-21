@@ -1,7 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 import { BarLoader } from "react-spinners";
@@ -12,19 +12,18 @@ import { buttonStyles, formStyles } from "Styles";
 const { URL } = process.env;
 
 const Form = (props) => {
-  const { companyInitial, urlInitial, emailInitial, setLoadingFormFn, loadingForm } = props;
+  const { company, url, email, setUserInfoFn, toggleLoading, loadingForm } = props;
   const { form, userEmail, inputContainer } = formStyles;
   const { btnOutline } = buttonStyles;
-  const [formData, setFormData] = useState({ company: "", url: "", email: "" });
   const navigate = useNavigate();
 
   const updateFormData = async (event) => {
     event.preventDefault();
-    setLoadingFormFn(true);
+    toggleLoading("form", true);
     try {
       const request = {
-        company: formData.company,
-        url: formData.url
+        company,
+        url
       };
       const requestOptions = {
         method: "POST",
@@ -38,46 +37,41 @@ const Form = (props) => {
       if (response.status === 401) navigate("/login");
       else {
         const data = await response.json();
-        const company = data.company?.[0] ?? "";
-        const url = data.url?.[0] ?? "";
-        setFormData({ ...formData, company, url });
+        const companyNew = data.company?.[0] ?? "";
+        const urlNew = data.url?.[0] ?? "";
+        setUserInfoFn(companyNew, urlNew);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    setLoadingFormFn(false);
+    toggleLoading("form", false);
   };
 
   const onCompanyChange = (event) => {
-    const company = event.target.value;
-    setFormData({ ...formData, company });
+    const companyNew = event.target.value;
+    setUserInfoFn({ company: companyNew });
   };
 
   const onUrlChange = (event) => {
-    const url = event.target.value;
-    setFormData({ ...formData, url });
+    const urlNew = event.target.value;
+    setUserInfoFn({ url: urlNew });
   };
 
   return (
     <form className={form}>
       <label>Numele Companiei:</label>
       <div className={inputContainer}>
-        <input
-          type="text"
-          name="company"
-          value={formData.company || companyInitial}
-          onChange={onCompanyChange}
-        />
+        <input type="text" name="company" value={company} onChange={onCompanyChange} />
       </div>
 
       <label>URL pagina joburi:</label>
       <div className={inputContainer}>
-        <input type="text" name="url" value={formData.url || urlInitial} onChange={onUrlChange} />
+        <input type="text" name="url" value={url} onChange={onUrlChange} />
       </div>
 
       <label>Email utilizator:</label>
       <div className={inputContainer}>
-        <input className={userEmail} type="email" value={formData.email || emailInitial} disabled />
+        <input className={userEmail} type="email" value={email} disabled />
       </div>
       {loadingForm ? (
         <BarLoader size={10} />
