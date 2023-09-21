@@ -2,11 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useNavigate } from "react-router";
-import { buttonStyles, headerBannerStyles } from "Styles";
 import programmerWorkingUrl from "Images/header_programmer.svg";
+import { buttonStyles, headerBannerStyles } from "Styles";
 import { Button } from "CommonComponents";
-
-const { URL } = process.env;
 
 const HeaderBanner = () => {
   const { btnSolid } = buttonStyles;

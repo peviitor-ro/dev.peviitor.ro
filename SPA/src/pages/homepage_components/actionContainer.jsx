@@ -5,8 +5,6 @@ import { useNavigate } from "react-router";
 import { Button, Logo } from "CommonComponents";
 import { actionContainerStyles, buttonStyles } from "Styles";
 
-const { URL } = process.env;
-
 const ActionContainer = () => {
   const {
     actionContainer,

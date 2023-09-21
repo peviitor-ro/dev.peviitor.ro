@@ -5,8 +5,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-param-reassign */
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
 import githubIconPath from "Images/github.svg";
 import gitlabIconPath from "Images/gitlab.svg";
 import { loginStyles } from "Styles";
@@ -15,7 +13,6 @@ const { URL } = process.env;
 
 const Login = () => {
   const { container, logo, preLogo, wellcomeMsg, row, github, gitlab } = loginStyles;
-  const navigate = useNavigate();
 
   const openOauth = async (event, oauthMethod) => {
     event.preventDefault();
