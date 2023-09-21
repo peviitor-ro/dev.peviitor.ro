@@ -16,7 +16,6 @@ try {
     $app->use($securityHeadersMiddleware);
 
     $userController = new UserController();
-    $app->get('/user/login', [$userController, 'login']);
     $app->get('/user/logout', [$userController, 'logout']);
 
     $gitHubController = new GitHubController();

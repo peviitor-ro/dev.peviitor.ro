@@ -65,6 +65,7 @@ class GitHubController
             'methodName' => $methodName,
         ]);
 
+        $_SESSION['LAST_LOGIN'] = time();
         $response->redirect($_SERVER['URL'] . '/account');
     }
 }
